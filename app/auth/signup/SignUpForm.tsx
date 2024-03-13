@@ -22,9 +22,11 @@ import { toast } from 'react-toastify';
 import { registerUser } from './action';
 import { useRouter } from 'next/navigation';
 import { signIn } from 'next-auth/react';
-import { Props } from 'next/script';
+interface SignUpFormProps {
+  callbackUrl?: string;
+}
 
-const SignUpForm = (props: Props) => {
+const SignUpForm = (props: SignUpFormProps) => {
   let callbackUrl = props.callbackUrl ? props.callbackUrl : '/';
   const router = useRouter();
   const form = useForm<z.infer<typeof SignUpFormSchema>>({

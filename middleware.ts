@@ -58,6 +58,8 @@ export default withAuth(
         new URL(`/auth/login?callbackUrl=${encodedCallbackUrl}`, nextUrl)
       );
     }
+
+    
     return null;
   },
   {
