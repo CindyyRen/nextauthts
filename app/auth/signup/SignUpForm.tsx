@@ -75,7 +75,7 @@ const SignUpForm = (props: SignUpFormProps) => {
         <Form {...form}>
           <form onSubmit={form.handleSubmit(saveUser)} className="w-full">
             <div className="space-y-2">
-              {/* <FormField
+              <FormField
                   control={form.control}
                   name="username"
                   render={({ field }) => (
@@ -87,7 +87,7 @@ const SignUpForm = (props: SignUpFormProps) => {
                       <FormMessage />
                     </FormItem>
                   )}
-                /> */}
+                />
               <FormField
                 control={form.control}
                 name="email"

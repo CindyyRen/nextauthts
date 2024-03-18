@@ -7,18 +7,18 @@ import * as z from 'zod';
 import * as bcrypt from 'bcrypt';
 import { signIn } from 'next-auth/react';
 import { redirect } from 'next/navigation';
-import { FormSchema } from '@/app/schemas';
+import { RegisterSchema } from '@/app/schemas';
 
-export const registerUser = async (values: z.infer<typeof FormSchema>) => {
+export const registerUser = async (values: z.infer<typeof RegisterSchema>) => {
   try {
-    console.log(values);
-    const validatedFields = FormSchema.safeParse(values);
+    console.log('values', values);
+    const validatedFields = RegisterSchema.safeParse(values);
 
     if (!validatedFields.success) {
       return Promise.reject('Invalid fields!');
     }
 
-    const { email, password } = validatedFields.data;
+    const { username, email, password } = validatedFields.data;
     const hashedPassword = await bcrypt.hash(password, 10);
 
     const existingUser = await prisma.user.findUnique({
@@ -33,6 +33,7 @@ export const registerUser = async (values: z.infer<typeof FormSchema>) => {
 
     await prisma.user.create({
       data: {
+        name: username,
         email,
         hashedPassword: hashedPassword,
         userRole: 'EMPLOYER',
